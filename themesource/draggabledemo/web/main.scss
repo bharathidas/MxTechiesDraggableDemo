@@ -1,0 +1,224 @@
+// ---------------------------------------------------------------------------
+// DraggableDemo module styling
+// Used by the Draggable_Test page, a Mendix port of the examples on
+// https://react-grid-layout.github.io/react-draggable/
+// Every box is a MxTechies Draggable widget with different settings.
+// ---------------------------------------------------------------------------
+
+$mxt-blue: #0a5cd8;
+$mxt-blue-dark: #0848a8;
+$mxt-orange: #ff8c00;
+
+.mxt-demo-boxes {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 8px 0 48px;
+}
+
+// Every example box. Hover lifts it, an active drag turns it orange, and it eases back on drop.
+.mxt-demo-box {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    box-sizing: border-box;
+    padding: 12px;
+    border-radius: 10px;
+    background: #fff;
+    border: 2px solid $mxt-blue;
+    color: #1a1a1a;
+    font-size: 13px;
+    line-height: 1.35;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transition: box-shadow 180ms ease, border-color 180ms ease, background-color 180ms ease;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 4px;
+        background: linear-gradient(90deg, $mxt-blue, #4ea1ff);
+        opacity: 0.9;
+        transition: height 180ms ease;
+    }
+
+    &:hover {
+        border-color: #2f7bff;
+        box-shadow: 0 8px 18px rgba(10, 92, 216, 0.25);
+
+        &::before {
+            height: 6px;
+        }
+    }
+}
+
+.mxt-draggable--active .mxt-demo-box {
+    border-color: $mxt-orange;
+    background: #fff8ee;
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.25);
+
+    &::before {
+        background: linear-gradient(90deg, $mxt-orange, #ffc46b);
+        height: 6px;
+    }
+}
+
+.mxt-demo-disabled {
+    background: repeating-linear-gradient(135deg, #eef0f3 0 10px, #e2e5ea 10px 20px);
+    border-color: #adb5bd;
+    color: #6c757d;
+    cursor: not-allowed;
+
+    &::before {
+        background: #adb5bd;
+    }
+
+    &:hover {
+        border-color: #adb5bd;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.mxt-demo-body {
+    border-color: #6f42c1;
+
+    &::before {
+        background: linear-gradient(90deg, #6f42c1, #b197fc);
+    }
+}
+
+.mxt-demo-offset {
+    border-color: #d9480f;
+
+    &::before {
+        background: linear-gradient(90deg, #d9480f, #ff922b);
+    }
+}
+
+// Drag handle bar with a grip glyph
+.mxt-demo-handle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: grab;
+    background: $mxt-blue;
+    color: #fff;
+    padding: 6px 8px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    transition: background-color 150ms ease;
+
+    &::before {
+        content: "\2807\2807";
+        letter-spacing: -0.35em;
+        opacity: 0.8;
+        font-size: 14px;
+        line-height: 1;
+    }
+
+    &:hover {
+        background: $mxt-blue-dark;
+    }
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.mxt-demo-nodrag {
+    display: block;
+    cursor: not-allowed;
+    background: #f8d7da;
+    color: #842029;
+    padding: 6px 8px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.mxt-demo-scroll {
+    height: 105px;
+    overflow: auto;
+    background: rgba(250, 204, 21, 0.2);
+    border: 1px solid rgba(250, 204, 21, 0.6);
+    border-radius: 6px;
+    padding: 6px;
+    white-space: pre-wrap;
+}
+
+.mxt-demo-absolute {
+    position: absolute;
+    right: 24px;
+    bottom: 0;
+}
+
+.mxt-demo-box .btn {
+    margin-top: 6px;
+    padding: 2px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: transform 120ms ease, box-shadow 120ms ease;
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    }
+}
+
+// Live values (counter, x/y readouts)
+.mxt-demo-counter {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(10, 92, 216, 0.1);
+    color: $mxt-blue;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+// Bounded arena used by the "within my parent" examples
+.mxt-drag-arena {
+    position: relative;
+    height: 360px;
+    border: 2px dashed #8a8f99;
+    border-radius: 8px;
+    background: repeating-linear-gradient(0deg, transparent 0 49px, rgba(0, 0, 0, 0.06) 49px 50px),
+        repeating-linear-gradient(90deg, transparent 0 49px, rgba(0, 0, 0, 0.06) 49px 50px);
+    overflow: hidden;
+    margin-bottom: 24px;
+    transition: border-color 180ms ease, background-color 180ms ease;
+
+    &:has(.mxt-draggable--active) {
+        border-color: $mxt-orange;
+        background-color: rgba(255, 140, 0, 0.04);
+    }
+}
+
+.mxt-drag-card {
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    transition: filter 150ms ease;
+
+    &:hover {
+        filter: brightness(1.08);
+    }
+}
+
+.mxt-draggable--active.mxt-drag-card {
+    filter: brightness(1.15);
+    outline: 3px solid rgba(255, 255, 255, 0.6);
+}
+
+.mxt-drag-card-free {
+    background: linear-gradient(135deg, $mxt-blue, #2f7bff);
+}
+
+.mxt-drag-card-snap {
+    background: linear-gradient(135deg, #1f9d55, #37c172);
+}
