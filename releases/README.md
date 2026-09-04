@@ -1,7 +1,5 @@
 # Module packages
 
-Put the exported module package here, named `DraggableDemo.mpk`.
+- `DraggableDemo.mpk` — version 1.0.0, exported from Studio Pro 11.12.1. Import it through **App > Import module package**.
 
-To export it from Studio Pro: right-click the **DraggableDemo** module in the App Explorer, choose
-**Export module package...**, and save the file into this folder. Commit it and attach the same file to a
-GitHub release, which is what the Mendix Marketplace listing points at.
+The same file is attached to the matching GitHub release, which is what the Mendix Marketplace listing points at.
