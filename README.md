@@ -1,6 +1,6 @@
-# DraggableDemo
+# MxTechiesDraggableDemo
 
-An example Mendix module showing how to use the
+An example Mendix module (`MxTechiesDraggableDemo`) showing how to use the
 [MxTechies Draggable](https://github.com/bharathidas/MxTechiesDraggable) widget.
 It ports every box from the [react-draggable demo page](https://react-grid-layout.github.io/react-draggable/)
 to a Mendix page, so you can open one page and see each setting in action.
@@ -16,7 +16,7 @@ to a Mendix page, so you can open one page and see each setting in action.
 | `DS_DraggableDemo_Create` | Data source microflow that creates the demo object |
 | `ACT_DraggableDemo_AdjustX` / `AdjustY` | Move the "programmatic" box by changing its attributes |
 | `ACT_DraggableDemo_DragStart` / `DragStop` | Count active drags through the widget's events |
-| `themesource/draggabledemo/web/main.scss` | Styling for the boxes, handles, arena and drag states |
+| `themesource/mxtechiesdraggabledemo/web/main.scss` | Styling for the boxes, handles, arena and drag states |
 
 ## Examples on the page
 
@@ -37,7 +37,7 @@ to a Mendix page, so you can open one page and see each setting in action.
 ## Installation
 
 1. Install the MxTechies Draggable widget (Marketplace or the `.mpk` from its releases page).
-2. Import `releases/DraggableDemo.mpk` through **App > Import module package** in Studio Pro.
+2. Import `releases/MxTechiesDraggableDemo.mpk` through **App > Import module package** in Studio Pro.
 3. Add the `Draggable_Test` page to your navigation, or set it as a home page.
 4. Give the module role **User** to the user roles that should see the page and run the app.
 
