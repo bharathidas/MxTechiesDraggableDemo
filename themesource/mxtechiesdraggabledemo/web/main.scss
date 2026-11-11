@@ -21,7 +21,8 @@ $mxt-orange: #ff8c00;
 .mxt-demo-box {
     position: relative;
     width: 180px;
-    height: 180px;
+    // At least square; boxes with buttons grow instead of clipping them.
+    min-height: 180px;
     box-sizing: border-box;
     padding: 12px;
     border-radius: 10px;
@@ -153,6 +154,12 @@ $mxt-orange: #ff8c00;
     position: absolute;
     right: 24px;
     bottom: 0;
+
+    // On narrow screens the boxes wrap into one column, where the bottom-right corner lands on top of
+    // another box: let it flow with the others instead.
+    @media (max-width: 700px) {
+        position: static;
+    }
 }
 
 .mxt-demo-box .btn {
@@ -222,3 +229,156 @@ $mxt-orange: #ff8c00;
 .mxt-drag-card-snap {
     background: linear-gradient(135deg, #1f9d55, #37c172);
 }
+
+/* wave2 draggable demo (Draggable 2.2 examples: whiteboard, sortable kanban, photo grid, read-only) */
+.w2-card {
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #d9dee7;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    font-weight: 600;
+    height: 100%;
+}
+.w2-legend {
+    font-weight: 400;
+    font-size: 12px;
+    width: 230px;
+    background: #fffaf2;
+}
+.w2-canvas {
+    position: relative;
+    height: 420px;
+    margin-bottom: 16px;
+    border: 1px dashed #c9cfda;
+    border-radius: 10px;
+    background-color: #fbfcfe;
+    background-image: radial-gradient(#dfe3ea 1px, transparent 1px);
+    background-size: 20px 20px;
+    overflow: hidden;
+    .mx-listview,
+    .mx-listview > ul {
+        position: static;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background: transparent;
+    }
+    .mx-listview > ul > li {
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none; // the li boxes overlap at the origin; only the cards take the pointer
+        padding: 0;
+        border: 0;
+        background: transparent;
+    }
+    .mx-listview-empty,
+    .mx-listview-loadMore {
+        display: none;
+    }
+    // at the canvas origin: react-draggable measures selector bounds from the offset parent, so the legend is
+    // placed with Default X / Y (640, 300) instead of right/bottom
+    .w2-legend-slot {
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    }
+}
+.w2-task-board {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.w2-task-col {
+    flex: 1 1 220px;
+    padding: 8px;
+    border-radius: 10px;
+    background: #f3f5f8;
+    .task-list {
+        min-height: 140px;
+    }
+    .mx-listview > ul > li {
+        padding: 4px 0;
+        border: 0;
+        background: transparent;
+    }
+}
+.w2-photo-grid {
+    margin-bottom: 16px;
+    > ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+    }
+    > ul > li {
+        width: 120px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+    }
+    .mx-listview-loadMore {
+        display: none;
+    }
+}
+.w2-tile {
+    height: 90px;
+    padding: 8px;
+    border-radius: 8px;
+    color: #1d2433;
+    font-weight: 600;
+}
+.w2-tile-sky { background: #cfe6ff; }
+.w2-tile-sand { background: #f6e3c2; }
+.w2-tile-moss { background: #d3ebcf; }
+.w2-tile-rose { background: #f8d3dc; }
+.w2-readonly-area {
+    position: relative;
+    min-height: 120px;
+    margin-bottom: 16px;
+    padding: 12px;
+    border: 1px solid #e3e6ec;
+    border-radius: 10px;
+    .w2-card {
+        width: 240px;
+    }
+}
+.w2-canvas .mxt-draggable {
+    pointer-events: auto;
+}
+/* end wave2 draggable demo */
+
+/* list view demo (Draggable_ListView, 2.0) */
+.dld-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+.dld-hint { color: #6f6a61; font-size: 13px; }
+.dld-toolbar .btn { margin: 0; }
+.dld-list.mx-listview { background: #faf8f6; border: 1px dashed rgba(11, 9, 6, 0.14); border-radius: 14px; padding: 14px; }
+.dld-list.mx-listview > ul > li,
+.dld-list .mx-listview-item { border: 0; background: transparent; padding: 6px 0; }
+.dld-list .mx-listview-item:hover,
+.dld-list .mx-listview-item:focus { background: transparent; }
+.dld-note-view.mx-dataview, .dld-note-view .mx-dataview-content { padding: 0; margin: 0; }
+.dld-note {
+    display: flex; align-items: center; gap: 12px; width: 360px; max-width: 100%; padding: 12px 16px 12px 10px;
+    border-radius: 12px; background: #fff7c2; border: 1px solid rgba(11, 9, 6, 0.08);
+    box-shadow: 0 1px 2px rgba(11, 9, 6, 0.06), 0 6px 16px -8px rgba(11, 9, 6, 0.2);
+}
+.dld-note--yellow { background: #fff4b8; }
+.dld-note--blue { background: #dbeafe; }
+.dld-note--green { background: #dcfce7; }
+.dld-note--pink { background: #fce7f3; }
+.dld-note--violet { background: #ede9fe; }
+.dld-note-grip { color: rgba(11, 9, 6, 0.35); font-weight: 700; letter-spacing: -2px; cursor: grab; }
+.dld-note-body { display: flex; flex-direction: column; min-width: 0; }
+.dld-note-title { font-weight: 700; font-size: 14.5px; color: #1c1915; }
+.dld-note-detail { font-size: 12.5px; color: #4a443b; }
+.dld-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.dld-step { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 12px; background: #faf8f6; border: 1px solid rgba(11, 9, 6, 0.06); }
+.dld-step-no { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: #f26522; color: #fff; font-weight: 800; font-size: 12px; }
+.dld-step-title { font-weight: 700; margin-top: 4px; }
+.dld-step-text { font-size: 13px; color: #6f6a61; line-height: 1.5; }
+/* end list view demo */
